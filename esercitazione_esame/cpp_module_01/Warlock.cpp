@@ -1,4 +1,6 @@
 #include "Warlock.hpp"
+#include "ATarget.hpp"
+#include "ASpell.hpp"
 
 Warlock::Warlock()
 {
@@ -44,4 +46,26 @@ void	Warlock::setTitle(std::string const &str)
 void	Warlock::introduce() const
 {
 	std::cout << _name << ": I am" << _name << ", " << _title << "!" <<  std::endl;
+}
+
+void	Warlock::learnSpell(ASpell *spell)
+{
+	if (spell)
+		if (_SpellBook.find(spell->getName()) != _SpellBook.end())
+			_SpellBook[spell->getName()] = spell->clone();
+}
+
+void	Warlock::forgetSpell(std::string spellname)
+{
+	if (_SpellBook.find(spellname) != _SpellBook.end())
+	{
+		delete _SpellBook[spellname];
+		_SpellBook.erase(_SpellBook.find());
+	}
+}
+
+void	Warlock::launchSpell(std::string spellname, ATarget const &target)
+{
+	if (_SpellBook.find(spellname) != _SpellBook.end())
+		_SpellBook[spellname]->launch(target);
 }

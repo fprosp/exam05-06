@@ -59,7 +59,8 @@ void Warlock::learnSpell(ASpell* spell)
 
 void Warlock::forgetSpell(std::string SpellName)
 {
-	if (_SpellBook.find(SpellName) != _SpellBook.end()) {
+	if (_SpellBook.find(SpellName) != _SpellBook.end()) 
+	{
 		delete _SpellBook[SpellName];	
 		_SpellBook.erase(_SpellBook.find(SpellName));
 	}
